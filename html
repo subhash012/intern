@@ -1,0 +1,27 @@
+<!-- templates/index.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task Manager</title>
+</head>
+<body>
+    <h1>Task Manager</h1>
+    <form action="/add" method="post">
+        <label for="content">New Task:</label>
+        <input type="text" id="content" name="content" required>
+        <button type="submit">Add Task</button>
+    </form>
+    <ul>
+        {% for task_id, task in enumerate(tasks) %}
+            <li>
+                {{ task['content'] }} - Status: {{ task['status'] }}
+                [<a href="{{ url_for('toggle_task', task_id=task_id) }}">Toggle</a>]
+                [<a href="{{ url_for('delete_task', task_id=task_id) }}">Delete</a>]
+            </li>
+        {% endfor %}
+    </ul>
+</body>
+</html>
